@@ -1,0 +1,32 @@
+.image-post {
+    width: 200px;
+}
+
+.hide{
+    display: none;
+}
+.navbar-brand >a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-name{
+    font-size: 0.55rem;
+}
+.list-container{
+
+    list-style: none;
+    text-decoration: none;
+
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.70rem;
+    align-items: baseline;
+}
+.container>li>a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
