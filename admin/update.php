@@ -41,18 +41,27 @@ if($_POST['update']==='update'){
         $img = $_FILES["file"]["name"];
         $title = $_POST["title"];
         $content = $_POST["textarea"];
+        echo "<pre>";
+        echo $img;
+        echo "</pre>";
+        echo $img;
+            if (strlen($img)>0){
+//                header("location:minasidor.php");
+                $stmt = $conn->prepare("UPDATE `post` SET `title`= ?, `content` = ?, `image`=?  WHERE `id` = ?;");
+                $stmt->bind_param("sssi", $title, $content, $img, $_SESSION['hidden']);
 
 
-            $stmt = $conn->prepare("UPDATE `post` SET `title`= ?, `content` = ?, `image`=?  WHERE `id` = ?;");
-            $stmt->bind_param("sssi", $title, $content, $img, $_SESSION['hidden']);
+                $stmt->execute();
 
+            }elseif(empty($img)){
+               echo '00000000000000000000000000000000000000000000000000000000000000000000000000';
+            }
 
-            $stmt->execute();
 
     }
 }
 AppendNewData($conn);
-    header("location:minasidor.php");
+
 }
 
 ?>
@@ -79,7 +88,7 @@ AppendNewData($conn);
             </div>
             <div class="rov form-group">
                 <div class="form-image">
-                    <input type="file" name="file" value="<?=$data['image']?>">
+                    <input type="file" name="file" value="">
                 </div>
             </div>
             <div class="rov form-group">
