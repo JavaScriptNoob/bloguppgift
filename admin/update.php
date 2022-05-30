@@ -1,5 +1,9 @@
 <?php
 require_once '../db.php';
+
+
+include '../header.php';
+
 session_start();
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -8,8 +12,8 @@ $checkIfNameExist = "Select * FROM  post WHERE id = '". $_SESSION['hidden'].
         "'";
 $result = mysqli_query($conn, $checkIfNameExist)or trigger_error(mysqli_error());
 $data = mysqli_fetch_assoc($result);
-print_r($data);
-echo $_SESSION['user_active']['id'];
+
+
 if($_POST['update']==='update'){
  function AppendNewData($conn)
 {
@@ -23,8 +27,7 @@ if($_POST['update']==='update'){
 
 //        Bild uppladdning
 
-        if (!!$_FILES['file']['tmp_name']) // is the file uploaded yet?
-        {
+
 
             $info = explode('.', strtolower($_FILES['file']['name'])); // whats the extension of the file
 
@@ -36,7 +39,7 @@ if($_POST['update']==='update'){
             } else {
                 // error this file ext is not allowed
             }
-        }
+
 
         $img = $_FILES["file"]["name"];
         $title = $_POST["title"];
@@ -49,12 +52,11 @@ if($_POST['update']==='update'){
 //                header("location:minasidor.php");
                 $stmt = $conn->prepare("UPDATE `post` SET `title`= ?, `content` = ?, `image`=?  WHERE `id` = ?;");
                 $stmt->bind_param("sssi", $title, $content, $img, $_SESSION['hidden']);
-
-
                 $stmt->execute();
+                header('location:minasidor.php');
 
             }elseif(empty($img)){
-               echo '00000000000000000000000000000000000000000000000000000000000000000000000000';
+               echo 'Välja bild';
             }
 
 
@@ -72,12 +74,15 @@ AppendNewData($conn);
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/styles.css?v=<?php echo time(); ?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
-<div>
-    hello
-</div>
+
 <div class="container">
     <div class="center-container">
         <form enctype="multipart/form-data" action="" method="post">
@@ -93,11 +98,11 @@ AppendNewData($conn);
             </div>
             <div class="rov form-group">
                 <div class="form-main-text">
-                    <textarea name="textarea"><?=$data['content']?></textarea>
+                    <textarea name="textarea" rows="5"><?=$data['content']?></textarea>
                 </div>
             </div>
             <div class="rov form-group">
-                <div class="form-title">ss
+                <div class="form-title">
                     <input type="submit" name="update" value="update">
                 </div>
             </div>

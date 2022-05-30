@@ -6,13 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/styles.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../css/bootstrap.min.css?v=<?php echo time(); ?>">
+
     <title>Document</title>
 </head>
 <body>
 <!--&& isset($_POST['description']) &&-->
 <!--isset($_FILES['file']) &&-->
 <!--$_FILES['file']['size'] > 1-->
+
 <?php
 require_once '../db.php';
 session_start();
@@ -32,8 +33,7 @@ if(isset($_POST['update'])){
 
 //        Bild uppladdning
 
-        if (!!$_FILES['file']['tmp_name']) // is the file uploaded yet?
-        {
+
 
             $info = explode('.', strtolower($_FILES['file']['name'])); // whats the extension of the file
 
@@ -45,7 +45,7 @@ if(isset($_POST['update'])){
             } else {
                 // error this file ext is not allowed
             }
-        }
+
 
         $img = $_FILES["file"]["name"];
 
@@ -78,15 +78,15 @@ if(isset($_POST['update'])){
 
 }}
 ?>
-
+<div class="container">
 <div class="image-upload">
     <form action="" method="post" enctype="multipart/form-data">
 
 
         <div class="rov form-group">
-            <div class="form-main-text">
+            <div class="form-main-text image-update">
                 <label for="file-input">
-                    <img src="<?=$imagePath?>"/>
+                    <img class="ava" src="<?=$imagePath?>"/>
                 </label>
 
                 <input id="file-input" name="file" type="file" />
@@ -94,7 +94,7 @@ if(isset($_POST['update'])){
         </div>
 
         <div class="rov form-group">
-            <div class="form-main-text">
+            <div class="form-main-text ">
                 <label for="description"> Description</label>
                 <textarea name="description" id="description" cols="70" rows="10"><?=$_SESSION['user_active']['description']?></textarea>
             </div>
@@ -106,5 +106,6 @@ if(isset($_POST['update'])){
         </div>
     </form>
 </div>
+    </div>
 </body>
 </html>

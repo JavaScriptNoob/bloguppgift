@@ -5,30 +5,41 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/styles/styles.css?v=<?php echo time(); ?>">
     <title>Document</title>
 </head>
 <body>
 <?php
-
+require_once 'header.php';
 ?>
 
+<h2>
+    Welcome to blog
+</h2>
+
+<div class="sign-container">
+    <form action="" method="post" class="sign-form">
+
+        <div><input type="text" name="name" placeholder="Login"></div>
+        <div> <input type="password" name="password" placeholder="Lösenord"></div>
+        <div class="sign-inputs"><input name="login" type="submit" value="login">
+            <input name="register" type="submit" value="register"></div>
 
 
-<div class="center-container">
-    <form action="" method="post">
-        <input type="text" name="name" placeholder="Login">
-        <input type="password" name="password" placeholder="Lösenord">
-        <input name="login" type="submit" value="login">
-        <input name="register" type="submit" value="register">
+
+
 
     </form>
 </div>
 
 <?php
-require_once '../db.php';
+require_once 'db.php';
 session_start();
 
-
+echo  $_SERVER['DOCUMENT_ROOT'];;
 
 
 class NewUser
